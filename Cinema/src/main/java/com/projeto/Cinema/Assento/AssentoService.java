@@ -16,7 +16,7 @@ import java.util.Locale;
 
 @Service
 public class AssentoService {
-    private  final AssentoRepository assentoRepository;
+    private  final AssentoRepository assentoRepositoy;
     private final SessionRepository sessionRepository;
     public AssentoService(AssentoRepository assentoRepository, FilmeRepository filmeRepository, FilmeService filmeService, SessionRepository sessionRepository) {
         this.assentoRepository = assentoRepository;
