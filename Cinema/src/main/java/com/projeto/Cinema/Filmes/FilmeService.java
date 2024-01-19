@@ -29,38 +29,30 @@ public class FilmeService {
         return this.filmerRepository.findById(id).orElse(null);
     }
     @Transactional
-    public void generationShowTIme(ShowTimesSessionDTO dto){
+    public void generationShowTime(ShowTimesSessionDTO dto) {
         Filme filme = this.getById(dto.getIdFilm());
-        for(int x=0;x < dto.getNumRoom().length;x++){
+
+        for (int x = 0; x < dto.getNumRoom().length; x++) {
             LocalTime localtime = dto.getStartDisplay();
             LocalTime durationFilme = filme.getDurationFilme();
 
             for (int i = 1; i <= dto.getNumDisplay(); i++) {
 
-                if(localtime.isAfter(dto.getEndDisplay())){
-                    throw new RuntimeException("O filme :"+filme.getNomeFilme()+" ,tem a duração de: "+filme.getDurationFilme()+ ", e isso ultrapassa o limite estabelecido para uma nova sessão");
+                if (localtime.isAfter(dto.getEndDisplay())) {
+                    throw new RuntimeException("O filme :" + filme.getNomeFilme() + " ,tem a duração de: "
+                            + filme.getDurationFilme() + ", e isso ultrapassa o limite estabelecido para uma nova sessão");
                 }
+
                 Session session = new Session();
-                Assento assento=new Assento();
                 session.setNumRoom(dto.getNumRoom()[x]);
                 session.setStartSession(localtime);
-                for(int row=1;row <=dto.getNumRow();row++)
-                {
-                    for(int fileira=1;fileira <= dto.getNumSeat();fileira++){
-
-                    }
-                }
+                session.criarAssentos(dto.getNumRow(), dto.getNumSeat());
                 filme.addSession(session);
 
-                localtime = localtime.plusHours(durationFilme.getHour()).plusMinutes(durationFilme.getMinute()).plusSeconds(durationFilme.getSecond())
-                        .plusHours(dto.getIntervalDisplay().getHour()).plusMinutes(dto.getIntervalDisplay().getMinute()).plusSeconds(dto.getIntervalDisplay().getSecond());
-
+                localtime = localtime.plusHours(durationFilme.getHour()).plusMinutes(durationFilme.getMinute())
+                        .plusSeconds(durationFilme.getSecond()).plusHours(dto.getIntervalDisplay().getHour())
+                        .plusMinutes(dto.getIntervalDisplay().getMinute()).plusSeconds(dto.getIntervalDisplay().getSecond());
             }
         }
-
-
-
-
-
     }
 }

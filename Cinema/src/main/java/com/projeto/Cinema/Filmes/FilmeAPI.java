@@ -23,7 +23,7 @@ public class FilmeAPI {
     }
     @PostMapping("/GenerateSession")
     public ResponseEntity gerarsessao(@RequestBody ShowTimesSessionDTO dto){
-        this.filmeService.generationShowTIme(dto);
+        this.filmeService.generationShowTime(dto);
         return ResponseEntity.ok().build();
     }
 }
