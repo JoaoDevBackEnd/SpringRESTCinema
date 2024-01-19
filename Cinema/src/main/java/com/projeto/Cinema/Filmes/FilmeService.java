@@ -1,5 +1,6 @@
 package com.projeto.Cinema.Filmes;
 
+import com.projeto.Cinema.Assento.Assento;
 import com.projeto.Cinema.DTO.ShowTimesSessionDTO;
 import com.projeto.Cinema.Session.Session;
 import jakarta.transaction.Transactional;
@@ -12,7 +13,6 @@ import java.util.Date;
 
 @Service
 public class FilmeService {
-
     private final FilmeRepository filmerRepository;
 
     @Autowired
@@ -41,8 +41,15 @@ public class FilmeService {
                     throw new RuntimeException("O filme :"+filme.getNomeFilme()+" ,tem a duração de: "+filme.getDurationFilme()+ ", e isso ultrapassa o limite estabelecido para uma nova sessão");
                 }
                 Session session = new Session();
+                Assento assento=new Assento();
                 session.setNumRoom(dto.getNumRoom()[x]);
                 session.setStartSession(localtime);
+                for(int row=1;row <=dto.getNumRow();row++)
+                {
+                    for(int fileira=1;fileira <= dto.getNumSeat();fileira++){
+
+                    }
+                }
                 filme.addSession(session);
 
                 localtime = localtime.plusHours(durationFilme.getHour()).plusMinutes(durationFilme.getMinute()).plusSeconds(durationFilme.getSecond())

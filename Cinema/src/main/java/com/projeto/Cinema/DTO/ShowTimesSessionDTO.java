@@ -16,6 +16,24 @@ public class ShowTimesSessionDTO {
     private LocalTime intervalDisplay;
     private Integer numDisplay;
     private Integer numRoom[];
+    private Integer numRow;
+    private Integer numSeat;
+
+    public Integer getNumRow() {
+        return numRow;
+    }
+
+    public void setNumRow(Integer numRow) {
+        this.numRow = numRow;
+    }
+
+    public Integer getNumSeat() {
+        return numSeat;
+    }
+
+    public void setNumSeat(Integer numSeat) {
+        this.numSeat = numSeat;
+    }
 
     public Integer[] getNumRoom() {
         return numRoom;
